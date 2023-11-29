@@ -6,6 +6,7 @@ import {
   ParseIntPipe,
   Param,
   UsePipes,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
@@ -13,8 +14,10 @@ import { Cat } from './interfaces/cat.interface';
 import { ZodValidationPipe } from 'src/validation/zod/zod.pipe';
 import { createCatSchema } from 'src/validation/zod/zod.schema';
 import { ValidationPipe } from 'src/validation/validation.pipe';
+import { RolesGuard } from 'src/guards/roles/roles.guard';
 
 @Controller('cats')
+@UseGuards(RolesGuard)
 export class CatsController {
   constructor(private catsService: CatsService) {}
 
